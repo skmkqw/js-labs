@@ -1,0 +1,36 @@
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    height: 300px;
+    margin: auto;
+}
+
+.slider-inner {
+    display: flex;
+    align-items: center;
+}
+
+.slider-buttons {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visible {
+    visibility: visible !important;
+    display: block !important;
+}
+
+.slider-item {
+    display: none;
+    visibility: hidden;
+}
+
+img {
+    width: 600px;
+    height: 300px;
+}
