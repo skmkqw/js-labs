@@ -1,12 +1,69 @@
-const numberInput1 = document.getElementById('#liczba1')
-const numberInput2 = document.getElementById('#liczba2')
-const numberInput3 = document.getElementById('#liczba3')
-const numberInput4 = document.getElementById('#liczba4')
+const countButton = document.getElementById('count-btn');
+const addInputButton = document.getElementById('add-input');
+const resultsContainer = document.getElementById('results');
+const inputContainer = document.getElementById('input-container');
+const deleteButtons = document.querySelectorAll('.delete-btn');
 
-const countButton = document.getElementById('#przelicz')
+function calculateResults() {
+  const inputs = document.querySelectorAll('.input-field');
+  const values = [];
 
-const resultContainer = document.getElementById('#wyniki')
+  inputs.forEach(input => {
+    const value = parseFloat(input.value);
+    if (!isNaN(value)) {
+      values.push(value);
+    }
+  });
 
-countButton.addEventListener('click', () => {
-    resultContainer.innerHTML = numberInput1.value
-})
+  if (values.length > 0) {
+    const sum = values.reduce((a, b) => a + b, 0);
+    const avg = sum / values.length;
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+
+    resultsContainer.innerHTML = `
+      <p>Suma: ${sum}</p>
+      <p>Średnia: ${avg}</p>
+      <p>Min: ${min}</p>
+      <p>Max: ${max}</p>
+    `;
+  } else {
+    resultsContainer.innerHTML = '<p>Wpisz wartości numeryczne w polach tekstowych.</p>';
+  }
+}
+
+countButton.addEventListener('click', calculateResults);
+
+document.getElementById('input-container').addEventListener('input', calculateResults);
+
+addInputButton.addEventListener('click', () => {
+  const inputWrapper = document.createElement('div');
+  inputWrapper.classList.add('input-wrapper');
+
+  const newInput = document.createElement('input');
+  newInput.type = 'number';
+  newInput.classList.add('input-field');
+
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Usuń';
+  deleteButton.classList.add('delete-btn');
+
+  inputWrapper.appendChild(newInput);
+  inputWrapper.appendChild(deleteButton);
+
+  inputContainer.appendChild(inputWrapper);
+
+  deleteButton.addEventListener('click', () => {
+    inputWrapper.remove();
+    calculateResults();
+  });
+});
+
+function removeEmptyFields() {
+  const inputs = document.querySelectorAll('.input-field');
+  inputs.forEach(input => {
+    if (input.value === '') {
+      input.remove();
+    }
+  });
+}
