@@ -1,0 +1,17 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.metronome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
