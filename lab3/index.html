@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drumkit</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
 </head>
+
 <body>
-    <audio src="" controls></audio>
-    <audio src="" controls></audio>
-    <audio src="" controls></audio>
-    <audio src="" controls></audio>
+    <div class="main">
+        <div class="buttons">
+            <button id="record">Record</button>
+            <button id="play">Play All</button>
+            <button id="stop">Stop</button>
+        </div>
+
+        <div class="metronome">
+            <button id="metronome-toggle">Metronome Off</button>
+            <input type="number" id="bpm" value="120" />
+        </div>
+
+        <div id="channels">
+        </div>
+
+        <div class="sounds">
+            <audio id="kick" src="kick.wav" controls></audio>
+            <audio id="clap" src="clap.wav" controls></audio>
+            <audio id="hihat" src="hihat.wav" controls></audio>
+            <audio id="snare" src="snare.wav" controls></audio>
+            <audio id="metronome" src="metronome.wav"></audio>
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
+
 </html>
