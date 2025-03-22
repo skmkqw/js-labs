@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Slider</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="slider">
         <div class="slider-inner">
-            <div class="slider-item visible" id="slider-item-1">
-                <img src="1.jpg" alt="">
+            <div class="slider-item">
+                <img src="1.jpg" alt="Slide 1">
             </div>
             <div class="slider-item">
-                <img src="2.jpg" alt="" id="slider-item-2">
+                <img src="2.jpg" alt="Slide 2">
             </div>
             <div class="slider-item">
-                <img src="3.jpg" alt="" id="slider-item-3">
+                <img src="3.jpg" alt="Slide 3">
             </div>
         </div>
-        <div class="slider-buttons">
-            <button id="button-back">B</button>
-            <button id="button-forward">F</button>
-        </div>
+        
+        <button id="button-back" class="slider-nav">←</button>
+        <button id="button-forward" class="slider-nav">→</button>
+
+        <div class="dots"></div>
+
+        <button id="pause-play">⏸</button>
     </div>
+
+    <div id="lightbox" class="lightbox hidden">
+        <span id="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Image">
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
