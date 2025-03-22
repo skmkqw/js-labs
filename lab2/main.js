@@ -1,45 +1,98 @@
-const buttonBack = document.querySelector('#button-back')
-const buttonForward = document.querySelector('#button-forward')
+const sliderInner = document.querySelector('.slider-inner');
+const slides = document.querySelectorAll('.slider-item');
+const prevBtn = document.getElementById('button-back');
+const nextBtn = document.getElementById('button-forward');
+const dotsContainer = document.querySelector('.dots');
+const pausePlayBtn = document.getElementById('pause-play');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeLightbox = document.getElementById('close-lightbox');
 
-const slides = document.querySelectorAll('.slider-item')
+let currentSlideIndex = 0;
+let autoSlideInterval;
+let isPaused = false;
+let animationType = 'slide';
 
-let currentSlideIndex = 1;
+slides.forEach((_, index) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    dot.addEventListener('click', () => goToSlide(index));
+    dotsContainer.appendChild(dot);
+});
 
-let intervalId = setInterval(setNextSlide, 5000)
-
-function resetInterval() {
-    window.clearInterval(intervalId)
-    intervalId = setInterval(setNextSlide, 5000)
+function updateDots() {
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlideIndex);
+    });
 }
 
+function goToSlide(index) {
+    currentSlideIndex = index;
+    updateSlider();
+    resetAutoSlide();
+}
 
-function setNextSlide() {
-    slides[currentSlideIndex].classList.remove('visible')
-    currentSlideIndex++;
-    if (currentSlideIndex > 2) {
-        currentSlideIndex = 0
+function updateSlider() {
+    resetAutoSlide();
+    if (animationType === 'slide') {
+        sliderInner.style.transform = `translateX(${-currentSlideIndex * 100}%)`;
+    } else {
+        slides.forEach((slide, index) => {
+            slide.style.opacity = index === currentSlideIndex ? '1' : '0';
+            slide.style.transition = 'opacity 0.5s ease-in-out';
+        });
     }
-    slides[currentSlideIndex].classList.add('visible')
-    animateSlider()
-    resetInterval()
+    updateDots();
 }
 
-function setPreviouslide() {
-    slides[currentSlideIndex].classList.remove('visible')
-    currentSlideIndex--
-    if (currentSlideIndex < 0) {
-        currentSlideIndex = 2
+function nextSlide() {
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    updateSlider();
+}
+
+function prevSlide() {
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    updateSlider();
+}
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 4000);
+}
+
+function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    if (!isPaused) startAutoSlide();
+}
+
+pausePlayBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+        clearInterval(autoSlideInterval);
+        pausePlayBtn.textContent = '▶';
+    } else {
+        startAutoSlide();
+        pausePlayBtn.textContent = '⏸';
     }
-    slides[currentSlideIndex].classList.add('visible')
+});
 
-    resetInterval()
-}
+slides.forEach(slide => {
+    slide.querySelector('img').addEventListener('click', event => {
+        lightbox.classList.remove('hidden');
+        lightboxImg.src = event.target.src;
+        clearInterval(autoSlideInterval);
+    });
+});
 
-buttonForward.addEventListener('click', setNextSlide)
+closeLightbox.addEventListener('click', () => {
+    lightbox.classList.add('hidden');
+    if (!isPaused) {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+});
 
-buttonBack.addEventListener('click', setPreviouslide)
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
 
-
-console.log(slides)
-
-buttonBack.add
+updateSlider();
+startAutoSlide();
