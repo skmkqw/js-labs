@@ -9,30 +9,15 @@
 </head>
 
 <body>
-    <div class="main">
-        <div class="buttons">
-            <button id="record">Record</button>
-            <button id="play">Play All</button>
-            <button id="stop">Stop</button>
+    <main class="main">
+        <div>
+            <audio src="./sounds/clap.wav" class="clap" controls></audio>
+            <audio src="./sounds/hihat.wav" class="hihat" controls></audio>
+            <audio src="./sounds/kick.wav" class="kick" controls></audio>
+            <audio src="./sounds/snare.wav" class="snare" controls></audio>
+            <audio src="./sounds/metronome.wav" class="metronome"></audio>
         </div>
-
-        <div class="metronome">
-            <button id="metronome-toggle">Metronome Off</button>
-            <input type="number" id="bpm" value="120" />
-        </div>
-
-        <div id="channels">
-        </div>
-
-        <div class="sounds">
-            <audio id="kick" src="kick.wav" controls></audio>
-            <audio id="clap" src="clap.wav" controls></audio>
-            <audio id="hihat" src="hihat.wav" controls></audio>
-            <audio id="snare" src="snare.wav" controls></audio>
-            <audio id="metronome" src="metronome.wav"></audio>
-        </div>
-    </div>
-
+    </main>
     <script src="main.js"></script>
 </body>
 
