@@ -1,0 +1,52 @@
+body {
+    font-family: sans-serif;
+    background: #eef2f3;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+#city-form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#city-form input {
+    padding: 10px;
+    font-size: 16px;
+}
+#city-form button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+#cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+.city-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.city-card img {
+    width: 60px;
+    height: 60px;
+}
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-weight: bold;
+}
